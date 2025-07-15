@@ -1,0 +1,35 @@
+{
+  "apps": {
+    "http": {
+      "servers": {
+        "example": {
+          "listen": [
+            ":80"
+          ],
+          "routes": [
+            {
+              "match": [
+                {
+                  "path": [
+                    "/22311"
+                  ]
+                }
+              ],
+              "handle": [
+                {
+                  "handler": "static_response",
+                  "headers": {
+                    "Location": [
+                      "https://g.co"
+                    ]
+                  },
+                  "status_code": 302
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

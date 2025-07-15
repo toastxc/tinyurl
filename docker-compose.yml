@@ -1,0 +1,36 @@
+version: '3.9'
+services:
+  caddy_reverse_proxy:
+    command: "caddy run  --config  /etc/caddy/caddy.json -w"
+    # Use the caddy:latest image from Docker Hub
+    image: caddy:latest
+    # Restart policy: restart the container unless explicitly stopped
+    restart: unless-stopped
+    container_name: caddy_proxy
+    # ports for Caddy
+    ports:
+      - "2010:80"
+      - "2011:443"
+    volumes:
+      # Mount the host Caddyfile
+#      - ./Caddyfile:/etc/caddy/Caddyfile
+        - ./caddy.json:/etc/caddy/caddy.json
+    networks:
+      - caddy_net
+  frontend:
+    build:
+      dockerfile: Dockerfile
+    volumes:
+      - ./db.json:/usr/local/app/db.json
+      - ./caddy.json:/usr/local/app/caddy.json
+    ports:
+      - "8088:8080"
+volumes:
+  # persist data caddy_data
+  caddy_data:
+  # caddy_config Docker volume
+ # caddy_config:
+
+networks:
+  # Docker network for Caddy
+  caddy_net:

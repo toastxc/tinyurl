@@ -1,0 +1,35 @@
+[package]
+name = "tinyurl"
+version = "0.1.0"
+authors = ["ToastXC <100072983+toastxc@users.noreply.github.com>"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+dioxus = { version = "0.6.0", features = ["fullstack"] }
+serde_json = "1.0.133"
+serde = { version = "1.0.215", features = ["derive"] }
+#dioxus-bulma ={ git = "https://github.com/mrxiaozhuox/dioxus-bulma.git"}
+rand = { version = "0.8.5", optional = true, features = [] }
+lazy_static = { version = "1.5.0", optional = true }
+tokio = { version = "1.41.1", optional = true }
+url = "2.5.4"
+
+[features]
+server = ["dep:rand", "dioxus/server", "dep:lazy_static", "dep:tokio"]
+default = ["web"]
+web = ["dioxus/web"]
+desktop = ["dioxus/desktop"]
+#mobile = ["dioxus/mobile"] #
+[profile]
+
+[profile.wasm-dev]
+inherits = "dev"
+opt-level = 1
+
+[profile.server-dev]
+inherits = "dev"
+
+[profile.android-dev]
+inherits = "dev"
