@@ -88,7 +88,7 @@ fn app() -> Element {
 
         rsx! {
             tr {
-                td { "http://localhost:2010{c1}" }
+                td { "https://t.toastxc.xyz{c1}" }
                 td { "{c2}" }
                 td { class:"is-danger",
 
